@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: b7e6e8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.probs.Controllerr.FirstController">
+   <children>
+      <AnchorPane prefHeight="97.0" prefWidth="699.0" style="-fx-background-color: #85cc95;">
+         <children>
+            <Text fill="#fdfdfd" layoutX="216.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IT-Company" wrappingWidth="367.9144973754883">
+               <font>
+                  <Font name="Perpetua Titling MT Bold" size="47.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Button fx:id="start" layoutX="238.0" layoutY="175.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="253.0" style="-fx-background-color: #91618b; -fx-border-color: #375557; -fx-border-radius: 5;" textFill="WHITE">
+         <font>
+            <Font size="44.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

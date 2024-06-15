@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="185.0" prefWidth="196.0" style="-fx-background-color: #eaf7a8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.probs.Controllerr.AddProductsController">
+    <children>
+        <VBox fx:id="InsertInfo" alignment="CENTER" layoutX="28.0" layoutY="46.0" prefHeight="155.0" prefWidth="224.0" spacing="20.0" style="-fx-background-color: #eaf7a8;">
+            <children>
+                <TextField fx:id="InsertName" prefHeight="0.0" prefWidth="125.0" promptText="Name" style="-fx-border-color: #20474d;">
+                    <font>
+                        <Font name="Bell MT" size="12.0" />
+                    </font></TextField>
+                <TextField fx:id="InsertPrice" prefHeight="21.0" prefWidth="190.0" promptText="Price" style="-fx-border-color: #20474d;" />
+                <Button fx:id="Save" minWidth="53.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="85.0" style="-fx-background-color: #b1f7a8; -fx-border-color: #104f46;" text="SAVE" textFill="#0c383c">
+                    <effect>
+                        <Glow />
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
+            </children>
+        </VBox>
+        <AnchorPane layoutX="-3.0" layoutY="-4.0" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #b1f7a8; -fx-border-color: #15444a;">
+            <children>
+                <Label layoutX="75.0" layoutY="4.0" text="PRODUCTS">
+                    <font>
+                        <Font name="Bodoni MT" size="25.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

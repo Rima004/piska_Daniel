@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.94" prefHeight="400.0" prefWidth="501.0" style="-fx-background-color: #8ba4d6;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.probs.Controllerr.SecondController">
+  <tabs>
+    <Tab fx:id="Clients" style="-fx-background-color: #8ba4d6#8ba4d6;" text="Clients">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="347.0" prefWidth="501.0">
+                     <center>
+                        <TableView fx:id="client" editable="true" items="${controller.data}" prefHeight="321.0" prefWidth="501.0" style="-fx-background-color: pink;" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="id_client" prefWidth="62.66668450832367" style="-fx-background-color-fx-background-color: #ebe78d;" text="id_client" />
+                            <TableColumn fx:id="name" prefWidth="88.00000762939453" text="name" />
+                              <TableColumn fx:id="surname" prefWidth="103.33335876464844" text="surname" />
+                              <TableColumn fx:id="phone" prefWidth="83.33331298828125" text="phone" />
+                              <TableColumn fx:id="address" prefWidth="68.6666259765625" text="adress" />
+                              <TableColumn fx:id="edit" prefWidth="69.33331298828125" />
+                          </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <VBox prefHeight="41.0" prefWidth="600.0" style="-fx-background-color: #3a808a;" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="600.0" spacing="20.0">
+                                 <children>
+                                    <Button fx:id="Add" minWidth="53.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" opacity="0.94" prefHeight="39.0" prefWidth="53.0" style="-fx-background-color: #3a808a;">
+                                       <graphic>
+                                          <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../ADD(70).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets></Button>
+                                    <TextField fx:id="TextSearch" onKeyTyped="#SearchKey" prefHeight="17.0" prefWidth="255.0" promptText="Search" style="-fx-background-color: white;" />
+                                    <ImageView fitHeight="34.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@pngwing.com%20(70).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </top>
+                  </BorderPane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="ProductTab" style="-fx-background-color: #8ba4d6#8ba4d6 #8ba4d6#8ba4d6;" text="Product">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="501.0">
+               <children>
+                  <AnchorPane prefHeight="40.0" prefWidth="511.0" style="-fx-background-color: #3a808a;">
+                     <children>
+                        <Button fx:id="AddProduct" layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#AddProduct" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
+                           <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../ADD(70).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="SerchProduct" layoutX="90.0" layoutY="7.0" onKeyTyped="#SerchProducts" prefHeight="25.0" prefWidth="234.0" promptText="Search" style="-fx-background-color: white;" />
+                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="345.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pngwing.com%20(70).png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
+                  <TableView fx:id="Products" editable="true" items="${controller.data_products}" layoutX="63.0" layoutY="41.0" prefHeight="311.0" prefWidth="368.0" style="-fx-background-color: pink;">
+                    <columns>
+                      <TableColumn fx:id="id_product" prefWidth="70.6666841506958" text="Id_product" />
+                      <TableColumn fx:id="Name" prefWidth="123.9999771118164" text="Name" />
+                        <TableColumn fx:id="Price" prefWidth="94.66667175292969" text="Price" />
+                        <TableColumn fx:id="DeleteProduct" prefWidth="75.0" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="Departmets" text="Department">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="Department" items="${controller.data_departments}" layoutX="109.0" layoutY="39.0" prefHeight="305.0" prefWidth="273.0" style="-fx-background-color: pink;">
+                    <columns>
+                      <TableColumn fx:id="id_department" prefWidth="46.66675567626953" text="ID" />
+                      <TableColumn fx:id="Name_department" prefWidth="115.99998474121094" text="Name" />
+                        <TableColumn fx:id="Name_Manager" prefWidth="94.0" text="Manager" />
+                    </columns>
+                  </TableView>
+                  <AnchorPane prefHeight="40.0" prefWidth="511.0" style="-fx-background-color: #3a808a;">
+                     <children>
+                        <Button fx:id="AddProduct1" layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#AddProduct" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
+                           <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../ADD(70).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="SerchProduct1" layoutX="90.0" layoutY="7.0" onKeyTyped="#SerchProducts" prefHeight="25.0" prefWidth="234.0" promptText="Search" style="-fx-background-color: white;" />
+                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="345.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pngwing.com%20(70).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Untitled Tab">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

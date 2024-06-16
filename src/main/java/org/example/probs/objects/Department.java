@@ -1,11 +1,15 @@
 package org.example.probs.objects;
 
 
+import javafx.scene.control.ComboBox;
+
 public class Department {
     private int id;
     private String name;
 
     private Employee manager;
+
+    private ComboBox <String>ComboxManager;
 
 
     public Department()
@@ -20,8 +24,17 @@ public class Department {
         this.id=id;
         this.name=name;
         this.manager=manager;
+        this.ComboxManager = new ComboBox<>();
+
     }
 
+    public ComboBox<String> getComboxManager() {
+        return ComboxManager;
+    }
+
+    public void setComboxManager(ComboBox<String> comboxManager) {
+        ComboxManager = comboxManager;
+    }
 
     public int getId() {
         return id;

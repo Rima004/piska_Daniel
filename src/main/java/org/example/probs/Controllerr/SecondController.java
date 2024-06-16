@@ -1,6 +1,5 @@
 package org.example.probs.Controllerr;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,12 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
+import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.FloatStringConverter;
 import org.example.probs.Services.ServiceClient;
 import org.example.probs.Services.ServiceDepertment;
@@ -24,7 +26,6 @@ import org.example.probs.objects.Client;
 import org.example.probs.objects.Department;
 import org.example.probs.objects.Employee;
 import org.example.probs.objects.Product;
-import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
 import java.net.URL;
@@ -113,12 +114,12 @@ public class SecondController implements Initializable {
     @FXML
     private TextField SerchProduct;
 
-   @FXML
+    @FXML
     void SerchProducts(KeyEvent ignoredEvent) {
-      this.SearchInoProduct();
-   }
+        this.SearchInoProduct();
+    }
 
-   //Department
+    //Department
     @FXML
     private TableView<Department> Department;
     @FXML
@@ -127,19 +128,19 @@ public class SecondController implements Initializable {
     private TableColumn<Department, String> Name_department;
     @FXML
     private TableColumn<Department, String> Name_Manager;
-
-
+    @FXML
+    private TableColumn<org.example.probs.objects.Department, String> ComboxManager;
 
 
     private final ServiceClient dbHandler = new ServiceClient();
     private final ServiceProduct dbProduct = new ServiceProduct();
-    private final ServiceDepertment dbDepartment=new ServiceDepertment();
+    private final ServiceDepertment dbDepartment = new ServiceDepertment();
 
     private static final ObservableList<Client> data = FXCollections.observableArrayList();
     private static final ObservableList<Product> data_products = FXCollections.observableArrayList();
     private static final ObservableList<Department> data_departments = FXCollections.observableArrayList();
 
-    private static  ObservableList<Employee> data_emloyee = FXCollections.observableArrayList();
+    private static ObservableList<Employee> data_emloyee = FXCollections.observableArrayList();
 
     private static final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -155,7 +156,9 @@ public class SecondController implements Initializable {
         return data_departments;
     }
 
-    public ObservableList<Employee> getData_emloyee(){return data_emloyee;}
+    public ObservableList<Employee> getData_emloyee() {
+        return data_emloyee;
+    }
 
 
     @Override
@@ -168,6 +171,7 @@ public class SecondController implements Initializable {
         getDeleteProduct();
         editInfoProducts();
         showInfoDepartments();
+        editInfoDepartments();
 
     }
 
@@ -406,8 +410,6 @@ public class SecondController implements Initializable {
                 dbProduct.editDate(product.getId_product(), "ProductName", event.getNewValue());
                 alert.setContentText("Operation completed successfully!");
                 alert.show();
-                alert.setContentText("Operation completed successfully!");
-                alert.show();
             } else {
                 alert.setContentText("Error, field is empty!");
                 alert.show();
@@ -452,6 +454,7 @@ public class SecondController implements Initializable {
     private void showInfoDepartments() {
         data_departments.clear();
         ResultSet department = dbDepartment.Show();
+
         try {
             while (department.next()) {
                 int departmentId = department.getInt("id");
@@ -462,7 +465,7 @@ public class SecondController implements Initializable {
                 String Address = department.getString("Address");
                 String Phone = department.getString("Phone");
 
-                Employee employee= new Employee();
+                Employee employee = new Employee();
                 employee.setId_emloyee(managerId);
                 employee.setName(managerName);
                 employee.setSurname(Susrname);
@@ -474,6 +477,13 @@ public class SecondController implements Initializable {
                 department1.setName(departmentName);
                 department1.setManager(employee);
                 employee.setDepartment(department1);
+                ResultSet namManager = dbDepartment.AddEmployee(departmentId);
+                ComboBox<String> NAME = new ComboBox<>();
+                while (namManager.next()) {
+                    NAME.getItems().add(namManager.getString("name_employee"));
+                    NAME.getSelectionModel().select(department1.getManager().getName());
+                }
+                department1.setComboxManager(NAME);
 
                 data_departments.add(department1);
 
@@ -483,22 +493,35 @@ public class SecondController implements Initializable {
         }
         id_department.setCellValueFactory(new PropertyValueFactory<Department, Integer>("id"));
         Name_department.setCellValueFactory(new PropertyValueFactory<Department, String>("name"));
-        Name_Manager.setCellValueFactory(cellData -> {
-            Department department1 = cellData.getValue();
-            Employee manager = department1.getManager();
-            if (manager != null) {
-                String managerName = manager.getName(); // Предполагается, что у вас есть метод getName() в классе Employee
-                return new SimpleStringProperty(managerName);
-            } else {
-                return new SimpleStringProperty("No name");
-            }
-        });
 
+        ComboxManager.setCellValueFactory(new PropertyValueFactory<org.example.probs.objects.Department, String>("ComboxManager"));
 
 
     }
 
+    private void editInfoDepartments() {
+        Name_department.setCellFactory(TextFieldTableCell.<Department>forTableColumn());
+        Name_department.setOnEditCommit(event -> {
+            Department newdepartment = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            String newValue = event.getNewValue();
+            if (newValue != null && !newValue.isEmpty()) {
+                dbDepartment.editDate(newdepartment.getId(), "name_department", newValue);
+                alert.setContentText("Operation completed successfully!");
+                alert.show();
+            } else {
+                alert.setContentText("Error, field is empty!");
+                alert.show();
+                showInfoDepartments();
+            }
+        });
 
+
+    }
 }
+
+
+
+
+
 
 

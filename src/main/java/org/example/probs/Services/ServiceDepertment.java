@@ -41,5 +41,58 @@ public class ServiceDepertment {
         return resSet;
     }
 
+    public ResultSet AddEmployee(int id_department) {
+        String getDepartment = "SELECT Name_employee " +
+                "FROM employee " +
+                "WHERE id_department = " + id_department;
+
+        PreparedStatement prST = null;
+        try {
+            prST = getDBConnection().prepareStatement(getDepartment);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            resSet = prST.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resSet;
+    }
+
+    public void editDate(int id, String name_colm, String newInfo) {
+        String query = "UPDATE departments SET " + name_colm + " = ? WHERE id = ?";
+        try {
+            PreparedStatement prST = getDBConnection().prepareStatement(query);
+            prST.setString(1, newInfo);
+            prST.setInt(2, id);
+
+            prST.executeUpdate();
+
+            prST.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void editDateIndex(int id, String name_colm, int newInfo) {
+        String query = "UPDATE departments SET " + name_colm + " = ? WHERE id = ?";
+        try {
+            PreparedStatement prST = getDBConnection().prepareStatement(query);
+            prST.setInt(1, newInfo);
+            prST.setInt(2, id);
+
+            prST.executeUpdate();
+
+            prST.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 
 }

@@ -101,11 +101,12 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="Department" items="${controller.data_departments}" layoutX="109.0" layoutY="39.0" prefHeight="305.0" prefWidth="273.0" style="-fx-background-color: pink;">
+                  <TableView fx:id="Department" items="${controller.data_departments}" layoutX="46.0" layoutY="40.0" prefHeight="305.0" prefWidth="366.0" style="-fx-background-color: pink;">
                     <columns>
                       <TableColumn fx:id="id_department" prefWidth="46.66675567626953" text="ID" />
                       <TableColumn fx:id="Name_department" prefWidth="115.99998474121094" text="Name" />
-                        <TableColumn fx:id="Name_Manager" prefWidth="94.0" text="Manager" />
+                        <TableColumn fx:id="Name_Manager" prefWidth="108.66664632161456" text="Manager" />
+                        <TableColumn fx:id="ComboxManager" prefWidth="92.66668701171875" text="Column X" />
                     </columns>
                   </TableView>
                   <AnchorPane prefHeight="40.0" prefWidth="511.0" style="-fx-background-color: #3a808a;">

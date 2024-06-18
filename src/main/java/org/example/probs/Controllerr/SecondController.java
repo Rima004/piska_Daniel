@@ -173,6 +173,23 @@ public class SecondController implements Initializable {
     @FXML
     private TableColumn Delete_employee;
 
+    @FXML
+    void Add_employees(MouseEvent event) {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/probs/AddEmployee.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            showInfoDepartments();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     private final ServiceEmployee dbEmployee = new ServiceEmployee();
     private final ServiceClient dbHandler = new ServiceClient();

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="299.0" prefWidth="282.0" style="-fx-background-color: #eaf7a8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.probs.Controllerr.AddEmployeeController">
+    <children>
+        <VBox fx:id="InsertInfo" alignment="CENTER" layoutX="29.0" layoutY="35.0" prefHeight="221.0" prefWidth="224.0" spacing="20.0" style="-fx-background-color: #eaf7a8;">
+            <children>
+                <TextField fx:id="InsertName" prefHeight="0.0" prefWidth="125.0" promptText="Name" style="-fx-border-color: #20474d;">
+                    <font>
+                        <Font name="Bell MT" size="12.0" />
+                    </font></TextField>
+                <TextField fx:id="InsertPrice" prefHeight="21.0" prefWidth="190.0" promptText="Surname" style="-fx-border-color: #20474d;" />
+            <TextField promptText="Address" style="-fx-border-color: #20474d;" />
+            <TextField promptText="Phone" style="-fx-border-color: #20474d;" />
+            </children>
+        </VBox>
+        <AnchorPane layoutX="-3.0" layoutY="-4.0" prefHeight="39.0" prefWidth="285.0" style="-fx-background-color: #b1f7a8; -fx-border-color: #15444a;">
+            <children>
+                <Label layoutX="75.0" layoutY="4.0" text="PRODUCTS">
+                    <font>
+                        <Font name="Bodoni MT" size="25.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

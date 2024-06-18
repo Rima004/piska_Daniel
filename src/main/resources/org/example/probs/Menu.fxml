@@ -148,7 +148,7 @@
                   </TableView>
                   <AnchorPane prefHeight="42.0" prefWidth="684.0" style="-fx-background-color: #3a808a;">
                      <children>
-                        <Button layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#Add_Department" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
+                        <Button fx:id="Add_Employee" layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#Add_employees" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
                            <graphic>
                               <ImageView fitHeight="33.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -13,6 +13,7 @@ public class Employee  {
     private String address;
     private String phone;
     private Department department;
+    private int commission;
     private ComboBox<Department> Combo_box_Department;
 
    public Employee() {

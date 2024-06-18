@@ -14,29 +14,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.94" prefHeight="400.0" prefWidth="501.0" style="-fx-background-color: #8ba4d6;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.probs.Controllerr.SecondController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.94" prefHeight="600.0" prefWidth="684.0" style="-fx-background-color: #8ba4d6;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.probs.Controllerr.SecondController">
   <tabs>
     <Tab fx:id="Clients" style="-fx-background-color: #8ba4d6#8ba4d6;" text="Clients">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="200.0">
                <children>
-                  <BorderPane prefHeight="347.0" prefWidth="501.0">
-                     <center>
-                        <TableView fx:id="client" editable="true" items="${controller.data}" prefHeight="321.0" prefWidth="501.0" style="-fx-background-color: pink;" BorderPane.alignment="CENTER">
-                          <columns>
-                            <TableColumn fx:id="id_client" prefWidth="62.66668450832367" style="-fx-background-color-fx-background-color: #ebe78d;" text="id_client" />
-                            <TableColumn fx:id="name" prefWidth="88.00000762939453" text="name" />
-                              <TableColumn fx:id="surname" prefWidth="103.33335876464844" text="surname" />
-                              <TableColumn fx:id="phone" prefWidth="83.33331298828125" text="phone" />
-                              <TableColumn fx:id="address" prefWidth="68.6666259765625" text="adress" />
-                              <TableColumn fx:id="edit" prefWidth="69.33331298828125" />
-                          </columns>
-                        </TableView>
-                     </center>
+                  <BorderPane prefHeight="600.0" prefWidth="684.0">
                      <top>
                         <VBox prefHeight="41.0" prefWidth="600.0" style="-fx-background-color: #3a808a;" BorderPane.alignment="CENTER">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="600.0" spacing="20.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="590.0" spacing="20.0">
                                  <children>
                                     <Button fx:id="Add" minWidth="53.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" opacity="0.94" prefHeight="39.0" prefWidth="53.0" style="-fx-background-color: #3a808a;">
                                        <graphic>
@@ -60,15 +48,27 @@
                            </children>
                         </VBox>
                      </top>
+                     <center>
+                        <TableView fx:id="client" editable="true" items="${controller.data}" prefHeight="600.0" prefWidth="690.0" style="-fx-background-color: pink;" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="id_client" prefWidth="62.66668450832367" style="-fx-background-color-fx-background-color: #ebe78d;" text="id_client" />
+                            <TableColumn fx:id="name" prefWidth="88.00000762939453" text="name" />
+                              <TableColumn fx:id="surname" prefWidth="103.33335876464844" text="surname" />
+                              <TableColumn fx:id="phone" prefWidth="83.33331298828125" text="phone" />
+                              <TableColumn fx:id="address" prefWidth="68.6666259765625" text="adress" />
+                              <TableColumn fx:id="edit" prefWidth="92.00002034505206" />
+                          </columns>
+                        </TableView>
+                     </center>
                   </BorderPane>
                </children></AnchorPane>
       </content>
     </Tab>
     <Tab fx:id="ProductTab" style="-fx-background-color: #8ba4d6#8ba4d6 #8ba4d6#8ba4d6;" text="Product">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="501.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="501.0">
                <children>
-                  <AnchorPane prefHeight="40.0" prefWidth="511.0" style="-fx-background-color: #3a808a;">
+                  <AnchorPane prefHeight="40.0" prefWidth="684.0" style="-fx-background-color: #3a808a;">
                      <children>
                         <Button fx:id="AddProduct" layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#AddProduct" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
                            <graphic>
@@ -79,39 +79,39 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <TextField fx:id="SerchProduct" layoutX="90.0" layoutY="7.0" onKeyTyped="#SerchProducts" prefHeight="25.0" prefWidth="234.0" promptText="Search" style="-fx-background-color: white;" />
-                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="345.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                        <TextField fx:id="SerchProduct" layoutX="159.0" layoutY="6.0" onKeyTyped="#SerchProducts" prefHeight="25.0" prefWidth="291.0" promptText="Search" style="-fx-background-color: white;" />
+                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="457.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@pngwing.com%20(70).png" />
                            </image>
                         </ImageView>
                      </children></AnchorPane>
-                  <TableView fx:id="Products" editable="true" items="${controller.data_products}" layoutX="63.0" layoutY="41.0" prefHeight="311.0" prefWidth="368.0" style="-fx-background-color: pink;">
+                  <TableView fx:id="Products" editable="true" items="${controller.data_products}" layoutX="159.0" layoutY="40.0" prefHeight="600.0" prefWidth="379.0" style="-fx-background-color: #8ba4d6;">
                     <columns>
                       <TableColumn fx:id="id_product" prefWidth="70.6666841506958" text="Id_product" />
                       <TableColumn fx:id="Name" prefWidth="123.9999771118164" text="Name" />
                         <TableColumn fx:id="Price" prefWidth="94.66667175292969" text="Price" />
-                        <TableColumn fx:id="DeleteProduct" prefWidth="75.0" />
+                        <TableColumn fx:id="DeleteProduct" prefWidth="83.33331298828125" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab fx:id="Departmets" text="Department">
+      <Tab fx:id="Departmets" style="-fx-background-color: #8ba4d6;" text="Department">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="Department" items="${controller.data_departments}" layoutX="46.0" layoutY="40.0" prefHeight="305.0" prefWidth="366.0" style="-fx-background-color: pink;">
+                  <TableView fx:id="Department" editable="true" items="${controller.data_departments}" layoutX="123.0" layoutY="40.0" prefHeight="600.0" prefWidth="433.0" style="-fx-background-color: pink;">
                     <columns>
                       <TableColumn fx:id="id_department" prefWidth="46.66675567626953" text="ID" />
                       <TableColumn fx:id="Name_department" prefWidth="115.99998474121094" text="Name" />
-                        <TableColumn fx:id="Name_Manager" prefWidth="108.66664632161456" text="Manager" />
-                        <TableColumn fx:id="ComboxManager" prefWidth="92.66668701171875" text="Column X" />
+                        <TableColumn fx:id="ComboxManager" prefWidth="170.00006103515625" text="Manager" />
+                        <TableColumn fx:id="DeleteDepartment" prefWidth="95.33328247070312" />
                     </columns>
                   </TableView>
-                  <AnchorPane prefHeight="40.0" prefWidth="511.0" style="-fx-background-color: #3a808a;">
+                  <AnchorPane prefHeight="40.0" prefWidth="684.0" style="-fx-background-color: #3a808a;">
                      <children>
-                        <Button fx:id="AddProduct1" layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#AddProduct" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
+                        <Button layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#Add_Department" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
                            <graphic>
                               <ImageView fitHeight="33.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -120,8 +120,8 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <TextField fx:id="SerchProduct1" layoutX="90.0" layoutY="7.0" onKeyTyped="#SerchProducts" prefHeight="25.0" prefWidth="234.0" promptText="Search" style="-fx-background-color: white;" />
-                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="345.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                        <TextField fx:id="SearchDepartmnet" layoutX="156.0" layoutY="6.0" onKeyTyped="#SerachDepartment" prefHeight="25.0" prefWidth="297.0" promptText="Search" style="-fx-background-color: white;" />
+                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="475.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@pngwing.com%20(70).png" />
                            </image>
@@ -131,9 +131,41 @@
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Untitled Tab">
+      <Tab fx:id="Employee" style="-fx-background-color: #8ba4d6;" text="Employee">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="TableEmployee" editable="true" items="${controller.data_employee}" layoutX="-2.0" layoutY="40.0" prefHeight="600.0" prefWidth="684.0" style="-fx-background-color: pink;">
+                    <columns>
+                      <TableColumn fx:id="id_employee" prefWidth="49.33334493637085" text="ID" />
+                      <TableColumn fx:id="Name_employee" prefWidth="63.999996185302734" text="Name" />
+                        <TableColumn fx:id="Surname_Employee" prefWidth="90.00000762939453" text="Surname" />
+                        <TableColumn fx:id="Address_employee" prefWidth="97.33329772949219" text="Address" />
+                        <TableColumn fx:id="Phone_employee" prefWidth="68.00006103515625" text="Phone" />
+                        <TableColumn fx:id="Department_employee" prefWidth="193.33328247070312" text="Deapartment" />
+                        <TableColumn fx:id="Delete_employee" prefWidth="112.0" />
+                    </columns>
+                  </TableView>
+                  <AnchorPane prefHeight="42.0" prefWidth="684.0" style="-fx-background-color: #3a808a;">
+                     <children>
+                        <Button layoutX="3.0" layoutY="-1.0" minWidth="47.0" mnemonicParsing="false" onMouseClicked="#Add_Department" prefHeight="40.0" prefWidth="55.0" style="-fx-background-color: #3a808a;">
+                           <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../ADD(70).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="SearchDepartmnet1" layoutX="126.0" layoutY="7.0" onKeyTyped="#SerachDepartment" prefHeight="25.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: white;" />
+                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="468.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pngwing.com%20(70).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
         </content>
       </Tab>
   </tabs>

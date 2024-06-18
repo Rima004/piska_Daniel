@@ -9,7 +9,7 @@ public class Department {
 
     private Employee manager;
 
-    private ComboBox <String>ComboxManager;
+    private ComboBox <Employee>ComboxManager;
 
 
     public Department()
@@ -19,7 +19,20 @@ public class Department {
         this.manager=null;
     }
 
-    Department(int id, String name, Employee manager)
+    public Department(String name)
+    {
+        this.name=name;
+    }
+
+
+    public Department(String name,int id)
+    {
+        this.name=name;
+        this.id=id;
+
+    }
+
+public Department(int id, String name, Employee manager)
     {
         this.id=id;
         this.name=name;
@@ -28,11 +41,11 @@ public class Department {
 
     }
 
-    public ComboBox<String> getComboxManager() {
+    public ComboBox<Employee> getComboxManager() {
         return ComboxManager;
     }
 
-    public void setComboxManager(ComboBox<String> comboxManager) {
+    public void setComboxManager(ComboBox<Employee> comboxManager) {
         ComboxManager = comboxManager;
     }
 
@@ -62,7 +75,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Name department" + name;
+        return this.name;
     }
 
 }

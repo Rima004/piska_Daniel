@@ -1,8 +1,10 @@
 package org.example.probs.objects;
 
+import javafx.scene.control.ComboBox;
+
 import java.io.Serializable;
 
-public class Employee implements Serializable {
+public class Employee  {
 
 
     private int id_emloyee;
@@ -11,6 +13,7 @@ public class Employee implements Serializable {
     private String address;
     private String phone;
     private Department department;
+    private ComboBox<Department> Combo_box_Department;
 
    public Employee() {
         id_emloyee = 0;
@@ -20,11 +23,26 @@ public class Employee implements Serializable {
         phone = "unknown";
         department = null;
     }
+    public Employee(int id)
+    {
+        this.id_emloyee=id;
+    }
 
-    Employee(int id_emloyee, String name, Department department) {
+    public Employee(int id_emloyee,String name)
+    {
+        this.id_emloyee=id_emloyee;
+        this.name=name;
+        this.department = null;
+        this.Combo_box_Department = new ComboBox<>();
+
+    }
+
+    public Employee(int id_emloyee, String name,String surname, Department department) {
         this.id_emloyee = id_emloyee;
         this.name = name;
+        this.Surname=surname;
         this.department = department;
+        this.Combo_box_Department = new ComboBox<>();
     }
 
  public    Employee(String name, String Surname ,String address, String phone, Department department) {
@@ -33,6 +51,15 @@ public class Employee implements Serializable {
         this.address = address;
         this.phone = phone;
         this.department = department;
+     this.Combo_box_Department = new ComboBox<>();
+    }
+
+    public ComboBox<Department> getCombo_box_Department() {
+        return Combo_box_Department;
+    }
+
+    public void setCombo_box_Department(ComboBox<Department> combo_box_Department) {
+        Combo_box_Department = combo_box_Department;
     }
 
     public void setId_emloyee(int id_emloyee) {
@@ -84,7 +111,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return getName();
+        return getName() +" " + getSurname();
     }
 
 }

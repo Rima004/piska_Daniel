@@ -5,7 +5,7 @@ public class Product {
     private String name;
     private Float price;
 
-    Product() {
+  public   Product() {
         id_product = 0;
         name = "unknown";
         price = Float.valueOf(0);
@@ -48,6 +48,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Id_product: " + id_product + "\n Name product: " + name;
+        return getName();
     }
 }

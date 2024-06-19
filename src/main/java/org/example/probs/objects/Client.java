@@ -7,6 +7,12 @@ public class Client {
     private String LastName;
     private String phone;
     private String address;
+
+    public Client()
+    {
+
+    }
+
    public Client( String name, String surname, String phone,String address) {
         this.FirstName = name;
         this.LastName = surname;
@@ -64,7 +70,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Id_client " + id;
+        return getFirstName() +" "+ getLastName();
     }
 
 

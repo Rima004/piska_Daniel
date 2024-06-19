@@ -16,19 +16,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.FloatStringConverter;
-import org.example.probs.Services.ServiceClient;
-import org.example.probs.Services.ServiceDepertment;
-import org.example.probs.Services.ServiceEmployee;
-import org.example.probs.Services.ServiceProduct;
-import org.example.probs.objects.Client;
-import org.example.probs.objects.Department;
-import org.example.probs.objects.Employee;
-import org.example.probs.objects.Product;
+import org.example.probs.Services.*;
+import org.example.probs.objects.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -140,6 +135,7 @@ public class SecondController implements Initializable {
             stage.setScene(new Scene(root));
             stage.showAndWait();
             showInfoDepartments();
+            showInfoEmployee();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -171,6 +167,8 @@ public class SecondController implements Initializable {
     @FXML
     private TableColumn<Employee, ComboBox<Department>> Department_employee;
     @FXML
+    private TableColumn<Employee, Float> Commission_employee;
+    @FXML
     private TableColumn Delete_employee;
 
     @FXML
@@ -183,24 +181,94 @@ public class SecondController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.showAndWait();
-            showInfoDepartments();
+            showInfoEmployee();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @FXML
+    private TextField SearchEmployee;
+
+    @FXML
+    void SearchEmployee(KeyEvent event) {
+        this.SearchInfoEmployee();
+    }
+
+    //Contract
+
+    @FXML
+    private TableView<Contract> Contracts;
+    @FXML
+    private TableColumn<Contract, Integer> Number_contract;
+    @FXML
+    private TableColumn<Contract, Employee> Developer;
+    @FXML
+    private TableColumn<Contract, Product> Contract_product;
+    @FXML
+    private TableColumn<Contract, Client> Contract_client;
+    @FXML
+    private TableColumn<Contract, LocalDate> Date_contract;
+    @FXML
+    private TableColumn<Contract, Float> Summa_contract;
+    @FXML
+    private TableColumn Delete_Contract;
+
+    @FXML
+    void Add_Contracts(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/probs/AddContract.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            showInfoContract();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @FXML
+    private TextField SearchContract;
+
+
+    //    FINANCES
+    @FXML
+    private TableView<Employee> TableFinances;
+    @FXML
+    private TableColumn<Employee, String> FinancesName;
+    @FXML
+    private TableColumn<Employee, String> FinancesSurname;
+    @FXML
+    private TableColumn<Employee, Float> FinancesCommision;
+    @FXML
+    private TableColumn<Employee, Integer> FinancesContracts;
+    @FXML
+    private TableColumn<Employee, Float> FinancesTotalIncome;
+    @FXML
+    private TableColumn<Employee, Float> FinancesAvgIncome;
+    @FXML
+    private TableColumn<Employee, Float> FinancesMaxIncome;
+
+    @FXML
+    private TextField SearchFinance;
 
 
     private final ServiceEmployee dbEmployee = new ServiceEmployee();
     private final ServiceClient dbHandler = new ServiceClient();
     private final ServiceProduct dbProduct = new ServiceProduct();
     private final ServiceDepertment dbDepartment = new ServiceDepertment();
-
+    private final ServiceContract dbContract = new ServiceContract();
+    private final ServiceFinance dbFinance = new ServiceFinance();
     private static final ObservableList<Client> data = FXCollections.observableArrayList();
     private static final ObservableList<Product> data_products = FXCollections.observableArrayList();
     private static final ObservableList<Department> data_departments = FXCollections.observableArrayList();
-
     private static ObservableList<Employee> data_employee = FXCollections.observableArrayList();
+    private static ObservableList<Contract> data_contract = FXCollections.observableArrayList();
+    private static ObservableList<Finance> data_finances = FXCollections.observableArrayList();
+
 
     private static final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -220,6 +288,14 @@ public class SecondController implements Initializable {
         return data_employee;
     }
 
+    public ObservableList<Contract> getData_contract() {
+        return data_contract;
+    }
+
+    public ObservableList<Finance> getData_finances() {
+        return data_finances;
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -236,8 +312,10 @@ public class SecondController implements Initializable {
         showInfoEmployee();
         editInfoEmployees();
         getDeleteEmployee();
-
-
+        showInfoContract();
+        getDeleteContract();
+        SearchInfoContract();
+        showInfoFinance();
     }
 
     //CLIENT
@@ -683,7 +761,7 @@ public class SecondController implements Initializable {
 
     }
 
-//Employee
+    //Employee
     private void showInfoEmployee() {
         data_employee.clear(); // Очищаем текущие данные сотрудников из коллекции
 
@@ -697,6 +775,7 @@ public class SecondController implements Initializable {
                 employee.setSurname(employeResalt.getString("Surname"));
                 employee.setAddress(employeResalt.getString("Address"));
                 employee.setPhone(employeResalt.getString("Phone"));
+                employee.setCommission(employeResalt.getFloat("Commission"));
                 String id_department = employeResalt.getString("id_department");
 
                 // Если у сотрудника указан отдел, то извлекаем его данные
@@ -720,7 +799,7 @@ public class SecondController implements Initializable {
                 ComboBox<Department> nameComboBox = new ComboBox<>();
                 ResultSet combobox_department = dbDepartment.AllDepartments();
                 while (combobox_department.next()) {
-                    Department department = new Department( combobox_department.getString("name_department"),combobox_department.getInt("id"));
+                    Department department = new Department(combobox_department.getString("name_department"), combobox_department.getInt("id"));
                     nameComboBox.getItems().add(department);
 
                     // Выбираем текущий отдел сотрудника в ComboBox для редактирования
@@ -741,12 +820,12 @@ public class SecondController implements Initializable {
                             confirmationAlert.setHeaderText("Сотрудник является менеджером текущего отдела");
                             confirmationAlert.setContentText("Если отдел сотрудника изменится, отдел останется без менеджера.\nВы уверены, что хотите продолжить?");
 
-                            ButtonType buttonTypeYes  = new ButtonType("Да", ButtonBar.ButtonData.YES);
+                            ButtonType buttonTypeYes = new ButtonType("Да", ButtonBar.ButtonData.YES);
                             ButtonType noButton = new ButtonType("Нет", ButtonBar.ButtonData.NO);
-                            confirmationAlert.getButtonTypes().setAll(buttonTypeYes , noButton);
+                            confirmationAlert.getButtonTypes().setAll(buttonTypeYes, noButton);
 
                             Optional<ButtonType> result = confirmationAlert.showAndWait();
-                            if (result.isPresent() && result.get() == buttonTypeYes ) {
+                            if (result.isPresent() && result.get() == buttonTypeYes) {
                                 // Удаляем менеджера из текущего отдела
                                 dbDepartment.editManager(employee.getDepartment().getId());
                                 // Обновляем отдел сотрудника
@@ -788,7 +867,9 @@ public class SecondController implements Initializable {
         Address_employee.setCellValueFactory(new PropertyValueFactory<>("address"));
         Phone_employee.setCellValueFactory(new PropertyValueFactory<>("phone"));
         Department_employee.setCellValueFactory(new PropertyValueFactory<>("Combo_box_Department"));
+        Commission_employee.setCellValueFactory(new PropertyValueFactory<>("commission"));
     }
+
     private void editInfoEmployees() {
         Name_employee.setCellFactory(TextFieldTableCell.<Employee>forTableColumn());
         Name_employee.setOnEditCommit(event -> {
@@ -850,9 +931,33 @@ public class SecondController implements Initializable {
                 showInfoEmployee();
             }
         });
+        Commission_employee.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+
+        Commission_employee.setOnEditCommit(event -> {
+            Employee employee = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            Float newValue = event.getNewValue();
+
+            if (newValue != null && newValue >= 0.0f && newValue <= 1.0f) {
+                try {
+                    dbEmployee.editDateCommissio(employee.getId_emloyee(), "commission", newValue);
+                    alert.setContentText("Operation completed successfully!");
+                    alert.show();
+                    showInfoEmployee(); // Предположим, что это метод для обновления информации о сотрудниках
+                } catch (Exception e) {
+                    alert.setContentText("Error updating commission: " + e.getMessage());
+                    alert.show();
+                    showInfoEmployee();
+                }
+            } else {
+                alert.setContentText("Incorrect commission percentage");
+                alert.show();
+                showInfoEmployee();
+            }
+        });
 
 
     }
+
     public void getDeleteEmployee() {
         Callback<TableColumn<Employee, String>, TableCell<Employee, String>> cellFactory = (param) -> {
             final TableCell<Employee, String> cellEmployee = new TableCell<>() {
@@ -904,12 +1009,210 @@ public class SecondController implements Initializable {
         Delete_employee.setCellFactory(cellFactory);
     }
 
+    public void SearchInfoEmployee() {
+        String searchInfo = SearchEmployee.getText();
+        data_employee.clear();
+        data_employee.addAll(dbEmployee.filterByName(searchInfo));
+
+    }
+
+//Contract
+
+    private void showInfoContract() {
+        data_contract.clear();
+        ResultSet contracts = dbContract.Show();
+        try {
+            while (contracts.next()) { // Перебираем контракты
+                Contract contract = new Contract();
+                contract.setNumber_contract(contracts.getInt(1));
+
+                // Получаем информацию о сотруднике
+                ResultSet resEmployee = dbEmployee.SerachEmployee(contracts.getInt(2));
+                while (resEmployee.next()) {
+                    Employee developer = new Employee();
+                    developer.setId_emloyee(contracts.getInt(2));
+                    developer.setName(resEmployee.getString(1));
+                    developer.setSurname(resEmployee.getString(2));
+                    contract.setEmployee(developer);
+                }
+                resEmployee.close();
+
+                ResultSet resClient = dbHandler.SearchClient(contracts.getInt(4));
+                if (resClient.next()) {
+                    Client client1 = new Client();
+                    client1.setId(contracts.getInt(4));
+                    client1.setFirstName(resClient.getString(1));
+                    client1.setLastName(resClient.getString(2));
+                    contract.setClient(client1);
+                }
+                resClient.close();
+
+                // Получаем информацию о продукте
+                ResultSet res = dbProduct.SearchProduct(contracts.getInt(3));
+                if (res.next()) {
+                    Product product = new Product();
+                    product.setId_product(contracts.getInt(3));
+                    product.setName(res.getString(1));
+                    product.setPrice(res.getFloat(2)); // Предполагаем, что цена продукта находится во втором столбце
+                    contract.setProduct(product); // Устанавливаем продукт в контракт
+                }
+                res.close();
+
+                // Получаем информацию о клиенте
+
+                java.sql.Date sqlDate = contracts.getDate(5);
+                LocalDate localDate = sqlDate.toLocalDate();
+                contract.setDate(localDate);
+
+                contract.setSumm(contract.getProduct().getPrice());
+
+                data_contract.add(contract);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (contracts != null) {
+                    contracts.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+// Устанавливаем связь между столбцами таблицы и свойствами объекта Contract
+        Number_contract.setCellValueFactory(new PropertyValueFactory<>("Number_contract"));
+        Developer.setCellValueFactory(new PropertyValueFactory<>("employee"));
+        Contract_product.setCellValueFactory(new PropertyValueFactory<>("product"));
+        Contract_client.setCellValueFactory(new PropertyValueFactory<>("client"));
+        Date_contract.setCellValueFactory(new PropertyValueFactory<>("date"));
+        Summa_contract.setCellValueFactory(new PropertyValueFactory<>("Summ"));
+    }
+
+    public void getDeleteContract() {
+        Callback<TableColumn<Contract, String>, TableCell<Contract, String>> cellFactory = (param) ->
+        {
+            final TableCell<Contract, String> cellContract = new TableCell<>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        final Button deleteDepartment = new Button("DELETE");
+                        deleteDepartment.setStyle("-fx-background-color: #FFCCCC; -fx-text-fill: black;");
+                        deleteDepartment.setOnAction(event -> {
+
+                            Contract contract = getTableView().getItems().get(getIndex());
+
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Confirmation Dialog");
+                            alert.setHeaderText("Delete contract");
+
+                            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+                            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+                            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
 
+                            Button yesButton = (Button) alert.getDialogPane().lookupButton(buttonTypeYes);
+                            yesButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+
+                            Button noButton = (Button) alert.getDialogPane().lookupButton(buttonTypeNo);
+                            noButton.setStyle("-fx-background-color: #F44336; -fx-text-fill: white;");
+
+                            Optional<ButtonType> result = alert.showAndWait();
 
 
+                            if (result.isPresent() && result.get() == buttonTypeYes) {
+                                dbContract.Delete(contract.getNumber_contract());
+
+                                Alert deleteAlert = new Alert(Alert.AlertType.INFORMATION);
+                                deleteAlert.setTitle("Information");
+                                deleteAlert.setHeaderText(null);
+                                deleteAlert.setContentText("You deleted a department named: " + contract.getNumber_contract());
+                                deleteAlert.show();
+
+                                showInfoContract();
+                                showInfoClients();
+                                showInfoEmployee();
+                                showInfoProducts();
+
+                            }
+                        });
+                        setGraphic(deleteDepartment);
+                        setText(null);
+                    }
+                }
+            };
+
+            return cellContract;
+        };
+
+        Delete_Contract.setCellFactory(cellFactory);
+    }
 
 
+    public void SearchInfoContract() {
+        String searchInfo = SearchContract.getText().trim(); // Убедимся, что у нас нет лишних пробелов
+        if (!searchInfo.isEmpty()) {
+            try {
+                int number = Integer.parseInt(searchInfo);
+                data_contract.clear();
+                data_contract.addAll(dbContract.filterByName(number));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        } else {
+            alert.setContentText("ERROR");
+            alert.show();
+        }
+    }
+
+
+    //    Finances
+    private void showInfoFinance() {
+        data_finances.clear();
+
+        try {
+            ResultSet financeResult = dbFinance.Show();
+
+            while (financeResult.next()) {
+                Finance finance = new Finance();
+                finance.setName_employee(financeResult.getString("Name_employee"));
+                finance.setSurname(financeResult.getString("Surname"));
+                finance.setCommission(financeResult.getFloat("Commission"));
+                finance.setContracts(financeResult.getInt("contracts"));
+                finance.setIncome(financeResult.getFloat("income"));
+                finance.setAverage_income(financeResult.getFloat("average_income"));
+                finance.setMax_income(financeResult.getFloat("max_income"));
+                data_finances.add(finance);
+            }
+            financeResult.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        FinancesName.setCellValueFactory(new PropertyValueFactory<>("Name_employee"));
+        FinancesSurname.setCellValueFactory(new PropertyValueFactory<>("Surname"));
+        FinancesCommision.setCellValueFactory(new PropertyValueFactory<>("Commission"));
+        FinancesContracts.setCellValueFactory(new PropertyValueFactory<>("contracts"));
+        FinancesTotalIncome.setCellValueFactory(new PropertyValueFactory<>("income"));
+        FinancesAvgIncome.setCellValueFactory(new PropertyValueFactory<>("average_income"));
+        FinancesMaxIncome.setCellValueFactory(new PropertyValueFactory<>("max_income"));
+    }
+
+    public void SearchInfoFinances() {
+        String searchInfo = SearchFinance.getText();
+        data_finances.clear();
+        data_finances.addAll(dbFinance.filterByName(searchInfo));
+
+    }
+
+    @FXML
+    void SearchFinances(KeyEvent ignoredEvent) {
+        this.SearchInfoFinances();
+    }
 }
 
 

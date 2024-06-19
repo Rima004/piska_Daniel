@@ -49,9 +49,9 @@ public class ServiceDepertment implements Service<Department> {
     }
 
 
-    public ResultSet InsertManager(int id_manager)
+    public ResultSet InsertManager(int id)
     {String getDepartment = "SELECT Name_employee, Surname, Address, Phone " +
-            "FROM employee WHERE id = " + id_manager;
+            "FROM employee WHERE id = " + id;
 
         PreparedStatement prST = null;
         try {
@@ -69,10 +69,10 @@ public class ServiceDepertment implements Service<Department> {
 
     }
 
-    public ResultSet AddEmployee(int id_department) {
+    public ResultSet AddEmployee(int id) {
         String getDepartment = "SELECT Name_employee, id,Surname " +
                 "FROM employee " +
-                "WHERE id_department = " + id_department;
+                "WHERE id_department = " + id;
 
         PreparedStatement prST = null;
         try {

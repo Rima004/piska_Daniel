@@ -126,4 +126,27 @@ public class ServiceClient implements Service<Client> {
             throw new RuntimeException(e);
         }
     }
+    public ResultSet SearchClient(int id)
+    {String getDepartment = "SELECT Name, Surname " +
+            "FROM clients WHERE idClients  = " + id;
+
+        PreparedStatement prST = null;
+        try {
+            prST = getDBConnection().prepareStatement(getDepartment);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            resSet = prST.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resSet;
+
+    }
+
+
+
+
 }

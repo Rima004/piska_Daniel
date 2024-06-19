@@ -127,6 +127,19 @@ public class ServiceProduct  implements  Service<Product> {
         }
     }
 
+    public ResultSet SearchProduct(int id) {
+        String query = "SELECT ProductName, Price FROM products WHERE idProducts = ?";
+        try {
+            PreparedStatement prST = getDBConnection().prepareStatement(query);
+            prST.setInt(1, id);
+            ResultSet resSet = prST.executeQuery();
+            return resSet;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error executing SQL query", e);
+        }
+    }
+
+
 
 
 }

@@ -13,7 +13,7 @@ public class Employee  {
     private String address;
     private String phone;
     private Department department;
-    private int commission;
+    private Float commission;
     private ComboBox<Department> Combo_box_Department;
 
    public Employee() {
@@ -22,6 +22,7 @@ public class Employee  {
         Surname="unknown";
         address = "unknown";
         phone = "unknown";
+        commission= Float.valueOf(0);
         department = null;
     }
     public Employee(int id)
@@ -53,6 +54,14 @@ public class Employee  {
         this.phone = phone;
         this.department = department;
      this.Combo_box_Department = new ComboBox<>();
+    }
+
+    public Float getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Float commission) {
+        this.commission = commission;
     }
 
     public ComboBox<Department> getCombo_box_Department() {
